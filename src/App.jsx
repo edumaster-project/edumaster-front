@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext";
 import Landpage from "./pages/Landpage";
+import SignUp from "./pages/SignUp";
 
 export default function App() {
   return (
@@ -9,7 +10,7 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Landpage />} />
-            {/* <Route path="/sign-up" element={<SingUp />}/> */}
+            <Route path="/sign-up" element={<SignUp/>}/>
           </Routes>
         </BrowserRouter>
       </UserProvider>
