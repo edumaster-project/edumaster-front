@@ -1,15 +1,25 @@
 // import NavigationBar from "../../components/NavigationBar";
+// import { useContext } from "react";
+// import UserContext from "../../contexts/UserContext";
+
+import { Outlet } from "react-router-dom";
+import DashboardLayout from "../../components/DashboardLayout";
+import MenuSelection from "../../components/MenuSelection";
+import Container from "../../components/ContainerContent";
 
 export default function Dashboard() {
-  return (
-    <div className="dashboard">
-      {/* <NavigationBar /> */}
-      <aside className="w-1/5 h-full bg-gray-600 p-5">
-        <section className= "bg-white w-full h-48">
-            teste
-        </section>
+  const userData = localStorage.getItem("userData");
+  const data = JSON.parse(userData);
+  const name = data.user.name;
 
-      </aside>
-    </div>
+  // const {userData} = useContext(UserContext())
+
+  return (
+    <DashboardLayout>
+      <MenuSelection name={name} />
+      <Container>
+        <Outlet />
+      </Container>
+    </DashboardLayout>
   );
 }

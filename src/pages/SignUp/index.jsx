@@ -1,13 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import NavigationBar from "../../components/NavigationBar";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { signUp } from "../../services/singUpApi";
-import UserContext from "../../contexts/UserContext";
+
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const { setUserData } = useContext(UserContext);
 
   const [form, setForm] = useState({
     name: "",
@@ -24,12 +23,11 @@ export default function SignUp() {
     try {
       const userData = await signUp(form);
       console.log(userData);
-      setUserData(userData);
-      toast("Login realizado com sucesso!");
+      toast("Cadastro realizado com sucesso!");
       navigate("/sign-in");
     } catch (err) {
-      console.log(err.response.data.message);
-      toast(err.response.data.message);
+      console.warn(err.response.data.message);
+      toast("Usuário ou senha indisponiveis");
     }
   }
   return (
@@ -81,7 +79,7 @@ export default function SignUp() {
             className="font-bold cursor-pointer"
             onClick={() => navigate("/sign-in")}
           >
-            Log In
+             Log In
           </span>
         </h2>
       </main>
