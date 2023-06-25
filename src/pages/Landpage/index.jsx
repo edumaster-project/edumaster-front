@@ -29,7 +29,7 @@ export default function Landpage() {
         </nav>
       </header>
 
-      <div className="flex justify-center w-full h-full">
+      <div className="flex justify-center w-full h-full sm:flex-row">
         <aside className="w-2/5 h-full flex px-20 justify-center items-center flex-col gap-12">
           <h1 className="text-7xl font-bold text-white">
             School

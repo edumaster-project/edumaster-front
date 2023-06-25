@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import picture from "../../assets/profile.png";
-import { BadgeHelp, Home, LogOut, User2 } from "lucide-react";
+import { BadgeHelp, CircleDotDashed, Home, LogOut, PanelLeft, User2 } from "lucide-react";
 
 export default function MenuSelection(props) {
   const navigate = useNavigate();
@@ -32,6 +32,20 @@ export default function MenuSelection(props) {
       </div>
       <div
         className="flex items-center hover:bg-slate-500 cursor-pointer pl-4 text-white h-14 gap-3"
+        onClick={() => navigate("/dashboard/classroom")}
+      >
+        <CircleDotDashed />
+        Salas de Aula
+      </div>
+      <div
+        className="flex items-center hover:bg-slate-500 cursor-pointer pl-4 text-white h-14 gap-3"
+        onClick={() => navigate("/dashboard/transfers")}
+      >
+        <PanelLeft />
+        Transferências
+      </div>
+      <div
+        className="flex items-center hover:bg-slate-500 cursor-pointer pl-4 text-white h-14 gap-3"
         onClick={() => navigate("/dashboard/help")}
       >
         <BadgeHelp />
@@ -40,8 +54,8 @@ export default function MenuSelection(props) {
       <div
         className="flex items-center hover:bg-slate-500 cursor-pointer pl-4 text-white h-14 gap-3"
         onClick={() => {
-            localStorage.removeItem('userData')
-            navigate("/sign-in")
+          localStorage.removeItem("userData");
+          navigate("/sign-in");
         }}
       >
         <LogOut />

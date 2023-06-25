@@ -1,6 +1,3 @@
-// import NavigationBar from "../../components/NavigationBar";
-// import { useContext } from "react";
-// import UserContext from "../../contexts/UserContext";
 
 import { Outlet } from "react-router-dom";
 import DashboardLayout from "../../components/DashboardLayout";

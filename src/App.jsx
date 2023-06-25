@@ -10,6 +10,8 @@ import useToken from "./hooks/useToken";
 import Profile from "./pages/Dashboard/Profile";
 import MainBoard from "./pages/Dashboard/Mainboard";
 import Help from "./pages/Dashboard/Help";
+import Classes from "./pages/Dashboard/Classes";
+import Transfers from "./pages/Dashboard/Transfers";
 
 export default function App() {
   injectStyle();
@@ -33,6 +35,13 @@ export default function App() {
               <Route path="profile" element={<Profile />} />
               <Route path="main" element={<MainBoard />} />
               <Route path="help" element={<Help />} />
+              <Route path="classroom" element={<Classes />} />
+              <Route path="transfers" element={<Transfers />} />
+              <Route
+                index
+                path="*"
+                element={<Navigate to="/dashboard/main" />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
