@@ -1,6 +1,7 @@
-
-
+import { useParams } from "react-router-dom"
 
 export default function Profile(){
-    return(<>Working to do hey</>)
+    const {id} = useParams()
+    console.log(id)
+    return(<>Working to list the students</>)
 }

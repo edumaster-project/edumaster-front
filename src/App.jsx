@@ -32,9 +32,9 @@ export default function App() {
                 </VerifyCredentialToken>
               }
             >
-              <Route path="profile" element={<Profile />} />
               <Route path="main" element={<MainBoard />} />
               <Route path="help" element={<Help />} />
+              <Route path="profile/:id" element={<Profile />} />
               <Route path="classroom" element={<Classes />} />
               <Route path="transfers" element={<Transfers />} />
               <Route

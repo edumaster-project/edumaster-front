@@ -1,46 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CardModel from "./cardModel";
+import { toast } from "react-toastify";
+import { getInformations, save } from "../../../services/classesApi";
+import useToken from "../../../hooks/useToken";
 
 export default function Classes() {
   const [click, setClick] = useState(false);
+  const token = useToken();
 
   const [form, setForm] = useState({
-    sigla: "",
+    name: "",
     quantity: "",
   });
   function handleForm(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  const [data, setData] = useState([
-    { sigla: "teste", quantity: 40 },
-    { sigla: "9ano A", quantity: 39 },
-    { sigla: "teste", quantity: 40 },
-    { sigla: "9ano A", quantity: 39 },
-    { sigla: "teste", quantity: 40 },
-    { sigla: "9ano A", quantity: 39 },
-    { sigla: "teste", quantity: 40 },
-    { sigla: "9ano A", quantity: 39 },
-    { sigla: "teste", quantity: 40 },
-    { sigla: "9ano A", quantity: 39 },
-    { sigla: "teste", quantity: 40 },
-    { sigla: "9ano A", quantity: 39 },
-    { sigla: "teste", quantity: 40 },
-    { sigla: "9ano A", quantity: 39 },
-    { sigla: "teste", quantity: 40 },
-    { sigla: "9ano A", quantity: 39 },
-  ]);
+  const [data, setData] = useState();
 
-  function createClassroom(e) {
+  async function fillData() {
+    try {
+      const backData = await getInformations(token);
+      setData(backData);
+    } catch (err) {
+      toast(err.response.data.message);
+    }
+  }
+
+  useEffect(() => {
+    fillData();
+  }, [click]);
+
+  console.log(click)
+  async function createClassroom(e) {
     e.preventDefault();
 
-    setData([...data, form]);
-    setForm({ sigla: "", quantity: "" });
-    setClick(false);
+    try {
+      const classRoom = await save(form, token);
+      console.log(classRoom);
+      setForm({ name: "", quantity: "" });
+      setClick(false);
+      toast('Sala de aula cadastrada!')
+    } catch (err) {
+      console.log(err.response.data.message)
+      toast(err.response.data.message);
+    }
   }
 
   function CreateForm() {
     return (
-      <div className="absolute w-96 h-fit top-72 left-1/2 rounded-xl bg-gray-600 p-2">
+      <div className="absolute w-96 h-fit top-72 left-1/2 rounded-xl bg-gray-600/80 p-2">
         <h1 className="text-center font-bold text-xl text-white my-5">
           Formulário de Turma
         </h1>
@@ -49,8 +58,8 @@ export default function Classes() {
             className="w-full h-10 rounded-3xl px-5"
             placeholder="Sigla da Turma"
             type="text"
-            name="sigla"
-            value={form.sigla}
+            name="name"
+            value={form.name}
             onChange={handleForm}
             required
           />
@@ -84,12 +93,10 @@ export default function Classes() {
         Criar Turma
       </button>
       {click && <CreateForm />}
-      <div className="w-full h-full flex justify-center flex-wrap gap-5 pt-10 px-5 bg-purple-600 overflow-scroll">
+      <div className="w-full h-full flex justify-center flex-wrap gap-5 pt-10 px-5 overflow-scroll">
         {data &&
           data.map((el) => (
-            <div className="w-52 h-60 bg-gray-500 rounded-xl overflow-hidden">
-              <section className="h-1/2 w-full bg-blue-300">{el.sigla}</section>
-            </div>
+            <CardModel key={el.id} sigla={el.name} quantity={el.quantity} id={el.id}/>
           ))}
       </div>
     </div>

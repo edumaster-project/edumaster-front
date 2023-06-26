@@ -20,10 +20,10 @@ export default function Landpage() {
               <a href="#">About Us</a>
             </li>
             <li>
-              <a href="#">Sign Up</a>
+              <a href="/sign-up">Sign Up</a>
             </li>
             <li>
-              <a href="/sign-up">Login</a>
+              <a href="/sign-in">Login</a>
             </li>
           </ul>
         </nav>

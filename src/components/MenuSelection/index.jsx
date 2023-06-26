@@ -23,13 +23,13 @@ export default function MenuSelection(props) {
         <Home />
         Dashboard
       </div>
-      <div
+      {/* <div
         className="flex items-center hover:bg-slate-500 cursor-pointer pl-4 text-white h-14 gap-3"
         onClick={() => navigate("/dashboard/profile")}
       >
         <User2 />
         Minha Conta
-      </div>
+      </div> */}
       <div
         className="flex items-center hover:bg-slate-500 cursor-pointer pl-4 text-white h-14 gap-3"
         onClick={() => navigate("/dashboard/classroom")}
